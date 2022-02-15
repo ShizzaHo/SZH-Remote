@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SZH REMOTE - Панель управления</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="core.js"></script>
+</head>
+<body>
+    <div class="menu">
+
+        <details class="detailsMenu">
+            <summary class="detailsButton">Подключение</summary>
+            <input type="button" value="Сопряжение" class="menuButton" id="devices" onclick="pageChange(pages.devices)">
+        </details>
+
+        <details class="detailsMenu">
+            <summary class="detailsButton">Управление</summary>
+            <input type="button" value="Скриншот экрана" class="menuButton" id="screenshot" onclick="pageChange(pages.screenshot)">
+            <input type="button" value="Отправить команду" class="menuButton" id="commandSend" onclick="pageChange(pages.command)">
+            <input type="button" value="Макросы" class="menuButton" id="commandSend" onclick="pageChange(pages.command)">
+            <input type="button" value="Экран*" class="menuButton" id="commandSend" onclick="pageChange(pages.command)">
+            <input type="button" value="Воспроизвести звук*" class="menuButton" id="commandSend" onclick="pageChange(pages.command)">
+            <input type="button" value="Файловый менеджер*" class="menuButton" id="commandSend" onclick="pageChange(pages.command)">
+        </details>
+
+        <details class="detailsMenu">
+            <summary class="detailsButton">Инструкции</summary>
+            <input type="button" value="Первичная настройка" class="menuButton" onclick="openAlert('instructions/first_time.html','Первичная настройка')">
+            <input type="button" value="Синтаксис команд" class="menuButton">
+        </details>
+
+        <details class="detailsMenu">
+            <summary class="detailsButton">Настройки</summary>
+            <input type="button" value="Язык" class="menuButton">
+            <input type="button" value="Интерфейс" class="menuButton">
+            <input type="button" value="Официальный сайт" class="menuButton">
+            <input type="button" value="Поддержать автора" class="menuButton">
+        </details>
+
+    </div>
+
+    <div class="page" id="page_devices">
+        <div class="content">
+            <h1>Устройства</h1>
+            <h4>На данный момент вы подключены к: <span>Нет активного подключения</span></h4>
+            <br>
+            <p>Доступные для подключения устройства:</p>
+            <div class="tableView">
+                <div class="item">Устройство 1</div>
+                <div class="item selected">Устройство 2</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="page_screen">
+        <div class="content">
+            <h1>Скриншот экрана</h1>
+            <h4>Позволяет получить скриншот с подключенного устройства</h4>
+            <br>
+            <input type="button" value="Получить скриншот" class="button" onclick="getScreenshot()">
+            <br><br>
+            <img src="resourses/loader.png" class="loader closed" id="loader">
+            <img src="" class="screenshotresult closed" id="screenshotResult">
+        </div>
+    </div>
+
+    <div class="page" id="page_command">
+        <div class="content">
+            <h1>Отправить команду</h1>
+            <h4>Позволяет отправить команду на подключенное устройство</h4>
+            <br>
+            <input type="text" class="textbox" placeholder="cmd: ''start cmd''" id="commandBox">
+            <input type="button" value="Отправить" class="button" onclick="sendCommand()">
+            <input type="button" value="?" class="button">
+            <span id="commandResult"></span>
+            <br><br>
+            <h3>Быстрые команды:</h3>
+            <input type="button" value="Закрыть программу (Alt+F4)" class="button">
+            <input type="button" value="Свернуть все окна (Win+D)" class="button">
+            <input type="button" value="Заблокировать компьютер (Win+L)" class="button">
+            <input type="button" value="Переместиться на следующий рабочий стол (Win+ArrowLeft)" class="button">
+            <input type="button" value="Переместиться на прошлый рабочий стол (Win+ArrowRight)" class="button">
+            <input type="button" value="Переместиться на следующий рабочий стол (Win+ArrowLeft)" class="button">
+            <input type="button" value="Открыть специальное меню (ctrl+alt+delete)" class="button">
+        </div>
+    </div>
+
+    <div class="alert" id="alert">
+        <div class="content">
+            <div class="header">
+                <p class="title" id="alertTitle">Название окна</p>
+                <img src="resourses/close.png" class="close" onclick="closeAlert()">
+            </div>
+            <iframe src="" class="alertIframe" id="alertContent"></iframe>
+        </div>
+    </div>
+
+    <script src="interface.js"></script>
+</body>
+</html>
