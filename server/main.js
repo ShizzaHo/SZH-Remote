@@ -35,6 +35,8 @@ app.post("/", urlencodedParser, async function (request, response) {
         
         if(request.body.option == "cmd"){
             response.json({msg: await CMDcommandRunner(request.body.option2)});
+        } else if (request.body.option == "pressKey"){
+            response.json({msg: await pressKey(request.body.option2)});
         } else if (request.body.option == "shortcut"){
             response.json({msg: await shortcut(request.body.option2)});
         }
@@ -73,13 +75,30 @@ async function CMDcommandRunner(command) {
 async function shortcut(command) {
     console.log("Выполнение комманды 2/2");
 
-    let promise = new Promise((resolve, reject) => {
-        
-        robot.keyTap(command);
-        resolve(error.message)
+    let command_cut = command.split(",");
 
+    console.log(JSON.stringify(command_cut));
+
+    let promise = new Promise((resolve, reject) => {
+        let key = command_cut[command_cut.length-1];
+        command_cut.pop();
+
+        robot.keyTap(key, command_cut);
+
+        resolve("OK")
     });
     
+    return await promise;
+}
+
+async function pressKey(command) {
+    console.log("Выполнение комманды 2/2");
+
+    let promise = new Promise((resolve, reject) => {
+        robot.keyTap(command);
+        resolve("OK")
+    });
+
     return await promise;
 }
 

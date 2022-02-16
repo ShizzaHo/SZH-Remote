@@ -1,0 +1,63 @@
+<style>
+    html{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        margin: 20px;
+    }
+
+    h1, h2, h3, h4, p{
+        padding: 0;
+        margin: 0;
+    }
+
+    .cmddemo{
+        background-color: black;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: white;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-left: 10px;
+    }
+
+    .commandBlock{
+        background-color: rgba(0, 0, 0, 0.5);
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: white;
+    }
+</style>
+
+<html>
+    <body>
+        <h1>Синтаксис команд</h1>
+        <h2>Позволяет писать свои собственные макросы</h2>
+        <br>
+        <h3>Содержвание:</h3>
+        <a href="#features">Возможности макросов</a><br>
+        <a href="#syntax">Синтаксис</a><br>
+        <a href="#examples">Примеры написания макросов</a><br>
+        <br><br><br>
+        <a name="features"></a>
+        <h2>Возможности макросов</h2>
+        <p>Еще не готово</p>
+        <br>
+        <a name="syntax"></a>
+        <h2>Синтаксис</h2>
+        <p>Построение команды происходит в одну строку, и не может быть разделена на две и более, конструкция команды: <span class="commandBlock">method: "option"</span></p>
+        <p>Что такое <b>method</b>:</p>
+        <p>method это ничто иное как название требуего метода, который будет исполнять наш сервер, например написав <span class="commandBlock">cmd: "start cmd"</span> мы скажем нашему серверу что нам нужно обратиться к терминалу нашей системы, и выполнить введенную команду, в нашем случае откроется окно терминала системы</p>
+        <p>На данный момент сервер имеет поддержку следующих методов:</p>
+        <details>
+            <summary class="detailsButton">Методы</summary>
+            <p><b>cmd</b> - сервер будет обращаться к терминалу системы и выполнять команду, заданную в <b>option</b>. Пример: <span class="commandBlock">cmd: "start cmd"</span></p>
+            <p><b>pressKey</b> - сервер выполнит короткое нажатие клавиши заданную в <b>option</b>. Пример: <span class="commandBlock">pressKey: "enter"</span>, cписок кнопок доступен в <a href="http://robotjs.io/docs/syntax" target="_blank">документации robotJS</a></p>
+            <p><b>shortcut</b> - аналогичный pressKey метод, однако выполняет сочетание клавишь заданных в <b>option</b> клавиши чередуются через запятую. Пример: <span class="commandBlock">shortcut: "control,alt,delete"</span></p>
+            <p><b>type</b> - сервер начнет имитировать нажатия клавишь и набирать текст заданный в <b>option</b>. Пример: <span class="commandBlock">type: "hello world!"</span></p>
+        </details>
+        <p>Что такое <b>option</b>:</p>
+        <p>option это обыкновенная строка, которую мы задаем опционально нашему методу, если строка не нужна, читаться она не будет.</p>
+        <br>
+        <a name="examples"></a>
+        <h2>Примеры написания макросов</h2>
+        <p>Еще не готово</p>
+        <br>
+        </body>
+</html>

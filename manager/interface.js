@@ -25,3 +25,10 @@ function openAlert(url, name){
 function closeAlert(){
     document.getElementById("alert").style.display = "none";
 }
+
+function connectIP() {
+    let adress = document.getElementById("adress").value;
+    let ip = adress.split(":")[0];
+    let port = adress.split(":")[1];
+    nextConnectIP(ip,port);
+}

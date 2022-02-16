@@ -1,6 +1,42 @@
+// let ConnectingData = {
+//     ip: "192.168.0.172" ,
+//     port: "6600",
+// }
+
 let ConnectingData = {
-    ip: "192.168.0.172" ,
-    port: "6600",
+    ip: "" ,
+    port: "",
+}
+
+window.onload = function() {
+    if(localStorage.lastConnectedIP != undefined){
+        ConnectingData.ip = localStorage.lastConnectedIP;
+        ConnectingData.port = localStorage.lastConnectedPORT;
+    
+        nextConnectIP(ConnectingData.ip,ConnectingData.port);
+    }
+}
+
+function nextConnectIP(ip,port) {
+    ConnectingData.ip = ip;
+    ConnectingData.port = port;
+
+    document.getElementById("connectStatus").innerText = "Ошибка подключения к "+ConnectingData.ip+":"+ConnectingData.port;
+    $.ajax({
+        crossDomain: true,
+        url: "http://"+ConnectingData.ip+':'+ConnectingData.port+"/",      
+        method: 'post',     
+        dataType: 'json',         
+        data: {method: 'connecting'},     
+        success: (function (response) {
+            let adress = document.getElementById("connectStatus").innerText = "Успешно подключен к "+ConnectingData.ip+":"+ConnectingData.port;
+            localStorage.setItem("lastConnectedIP",ConnectingData.ip);
+            localStorage.setItem("lastConnectedPORT",ConnectingData.port);
+        }),
+        error: function (error) {
+            document.getElementById("connectStatus").innerText = "Ошибка подключения к "+ConnectingData.ip+":"+ConnectingData.port;
+        }
+    });
 }
 
 function getScreenshot() {
