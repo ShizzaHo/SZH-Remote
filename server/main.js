@@ -1,16 +1,20 @@
-const screenshot = require('screenshot-desktop')
-const { exec } = require("child_process");
-const robot = require('robotjs');
+//---
+const Connected = require('./modules/connecting');
+const Screenshot = require('./modules/screenshot');
+const Command = require('./modules/command');
+//---
 
-const fs = require('fs');
-
+//---
 const express = require("express");
 const app = express();
-var cors = require('cors')
+var cors = require('cors');
 const urlencodedParser = express.urlencoded({extended: false});
 app.use(cors())
+//---
 
+//---
 const port = 6600;
+//---
 
 app.post("/", urlencodedParser, async function (request, response) {
     console.log(" ");
@@ -19,88 +23,25 @@ app.post("/", urlencodedParser, async function (request, response) {
     console.log(request.body);
 
     if(request.body.method == "connecting"){
-        console.log("Подключено.");
+        Connected.check();
         response.send({msg: 'connected'});
     } else if (request.body.method == "screenshot"){
-        
-        screenshot({ filename: 'Last_Screenshot.jpg' }).then((imgPath) => {
-            console.log("Отправка скриншота");
-            response.send({msg: base64_encode("/Last_Screenshot.jpg")});
-        }).catch((err) => {
-            console.log("ОШИБКА.");
-        })
-
+        response.send({msg: Screenshot.base64_encode(Screenshot.get())});
     } else if (request.body.method == "command"){
         console.log("Выполнение комманды 1/2");
         
         if(request.body.option == "cmd"){
-            response.json({msg: await CMDcommandRunner(request.body.option2)});
+            response.json({msg: await Command.CMDcommandRunner(request.body.option2)});
         } else if (request.body.option == "pressKey"){
-            response.json({msg: await pressKey(request.body.option2)});
+            response.json({msg: await Command.pressKey(request.body.option2)});
         } else if (request.body.option == "shortcut"){
-            response.json({msg: await shortcut(request.body.option2)});
+            response.json({msg: await Command.shortcut(request.body.option2)});
         }
 
     } else {
         response.json({msg: 'error'});
     }
 });
-
-function base64_encode(file) {
-    return fs.readFileSync('./Last_Screenshot.jpg', 'base64');
-}
-
-async function CMDcommandRunner(command) {
-    console.log("Выполнение комманды 2/2");
-
-    let promise = new Promise((resolve, reject) => {
-        
-        exec(command, (error, stdout, stderr) => {
-            if (error) {
-              resolve(error.message)
-            }
-          
-            if (stderr) {
-              resolve(stderr)
-            }
-            resolve(stdout)
-
-        });
-
-    });
-    
-    return await promise;
-}
-
-async function shortcut(command) {
-    console.log("Выполнение комманды 2/2");
-
-    let command_cut = command.split(",");
-
-    console.log(JSON.stringify(command_cut));
-
-    let promise = new Promise((resolve, reject) => {
-        let key = command_cut[command_cut.length-1];
-        command_cut.pop();
-
-        robot.keyTap(key, command_cut);
-
-        resolve("OK")
-    });
-    
-    return await promise;
-}
-
-async function pressKey(command) {
-    console.log("Выполнение комманды 2/2");
-
-    let promise = new Promise((resolve, reject) => {
-        robot.keyTap(command);
-        resolve("OK")
-    });
-
-    return await promise;
-}
 
 app.listen(port);
 
