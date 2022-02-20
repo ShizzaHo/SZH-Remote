@@ -6,12 +6,14 @@ let pages = {
     devices: document.getElementById("page_devices"),
     screenshot: document.getElementById("page_screen"),
     command: document.getElementById("page_command"),
+    makro: document.getElementById("page_makro"),
 }
 
 function pageChange(selected){
     pages.devices.classList.remove("open")
     pages.screenshot.classList.remove("open")
     pages.command.classList.remove("open")
+    pages.makro.classList.remove("open")
     selected.classList.add("open")
 }
 

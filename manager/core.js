@@ -79,3 +79,8 @@ async function sendCommand() {
         })
     });
 }
+
+function sendCommandSpecial(value) {
+    document.getElementById("commandBox").value = value;
+    sendCommand()
+}

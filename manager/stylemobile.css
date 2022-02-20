@@ -3,6 +3,7 @@ body{
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     overflow-y: hidden;
 }
 
@@ -11,11 +12,20 @@ h1, h2, h3, h4{
     margin: 0;
 }
 
+.menuHeader{
+    position: fixed;
+    background-color: #4357AD;
+    height: 56px;
+    width: 100vw;
+    z-index: 1;
+}
+
 .menu{
+    margin-top: 56px;
     background-color: #4357AD;
     height: 100vh;
-    min-width: 200px;
-    width: 10vw;
+    width: 100vw;
+    /* display: none; */
 }
 
 .detailsButton{
@@ -69,6 +79,7 @@ h1, h2, h3, h4{
     width: 100%;
     overflow-y: auto;
     display: none;
+    top: 54px;
 }
 
 .open{
@@ -82,7 +93,7 @@ h1, h2, h3, h4{
 #page_devices .content{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
-    padding: 40px;
+    padding: 4px;
 }
 
 .tableView{
@@ -111,7 +122,7 @@ h1, h2, h3, h4{
 #page_screen .content{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
-    padding: 40px;
+    padding: 4px;
 }
 
 .button{
@@ -149,7 +160,7 @@ h1, h2, h3, h4{
 #page_command .content{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
-    padding: 40px;
+    padding: 4px;
 }
 
 .textbox{
@@ -166,14 +177,13 @@ h1, h2, h3, h4{
 #page_makro .content{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 20px;
-    padding: 40px;
+    padding: 4px;
 }
 
 .alert{
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,8 +193,8 @@ h1, h2, h3, h4{
 
 .alert .content{
     background-color: rgb(228, 223, 218);
-    width: 60vw;
-    height: 80vh;
+    width: 100vw;
+    height: 100vh;
     position: relative;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }

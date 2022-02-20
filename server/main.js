@@ -30,12 +30,16 @@ app.post("/", urlencodedParser, async function (request, response) {
     } else if (request.body.method == "command"){
         console.log("Выполнение комманды 1/2");
         
-        if(request.body.option == "cmd"){
-            response.json({msg: await Command.CMDcommandRunner(request.body.option2)});
-        } else if (request.body.option == "pressKey"){
-            response.json({msg: await Command.pressKey(request.body.option2)});
-        } else if (request.body.option == "shortcut"){
-            response.json({msg: await Command.shortcut(request.body.option2)});
+        switch (request.body.option) {
+            case "cmd":
+                response.json({msg: await Command.CMDcommandRunner(request.body.option2)});
+                break;
+            case "pressKey":
+                response.json({msg: await Command.pressKey(request.body.option2)});
+                break;
+            case "shortcut":
+                response.json({msg: await Command.shortcut(request.body.option2)});
+                break;
         }
 
     } else {
