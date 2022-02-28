@@ -7,6 +7,7 @@ let pages = {
     screenshot: document.getElementById("page_screen"),
     command: document.getElementById("page_command"),
     makro: document.getElementById("page_makro"),
+    filemanager: document.getElementById("page_file"),
 }
 
 function pageChange(selected){
@@ -14,6 +15,7 @@ function pageChange(selected){
     pages.screenshot.classList.remove("open")
     pages.command.classList.remove("open")
     pages.makro.classList.remove("open")
+    pages.filemanager.classList.remove("open")
     selected.classList.add("open")
 }
 
@@ -33,4 +35,9 @@ function connectIP() {
     let ip = adress.split(":")[0];
     let port = adress.split(":")[1];
     nextConnectIP(ip,port);
+}
+
+function getFiles() {
+    let path = document.getElementById("pathFiles").value;
+    getFilesServer(path);
 }

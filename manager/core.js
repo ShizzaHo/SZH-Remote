@@ -84,3 +84,18 @@ function sendCommandSpecial(value) {
     document.getElementById("commandBox").value = value;
     sendCommand()
 }
+
+async function getFilesServer(path) {
+    $.ajax({
+        crossDomain: true,
+        url: "http://"+ConnectingData.ip+':'+ConnectingData.port+"/",        
+        method: 'post',             
+        dataType: 'json',         
+        data: {method: 'filemanager', option: ''+path+''},     
+        success: (function (response) {
+            if(response.msg != ""){
+                alert(JSON.stringify(response.msg));
+            }
+        })
+    });
+}

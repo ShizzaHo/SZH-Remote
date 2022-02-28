@@ -2,6 +2,7 @@
 const Connected = require('./modules/connecting');
 const Screenshot = require('./modules/screenshot');
 const Command = require('./modules/command');
+const Filemanager = require('./modules/filemanager');
 //---
 
 //---
@@ -42,6 +43,8 @@ app.post("/", urlencodedParser, async function (request, response) {
                 break;
         }
 
+    } else if (request.body.method == "filemanager"){
+        response.send({msg: Filemanager.SendDataAndGetResult(request.body.option)});
     } else {
         response.json({msg: 'error'});
     }
@@ -49,7 +52,7 @@ app.post("/", urlencodedParser, async function (request, response) {
 
 app.listen(port);
 
-async function startmessage() {
+function startmessage() {
     console.log("Сервер запущен по порту: "+port);
     console.log("Используйте команду ipconfig в терминале Windows для получения Локального IP адресса");
     console.log("для подключения используйте конструкцию: \"localip:port\"");
